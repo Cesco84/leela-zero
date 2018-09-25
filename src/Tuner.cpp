@@ -28,6 +28,7 @@
 #include <random>
 #include <cmath>
 #include <fstream>
+#include <Eigen/Dense>
 
 #include "GTP.h"
 #include "OpenCL.h"
@@ -35,12 +36,8 @@
 #include "Utils.h"
 #include "Random.h"
 
-#ifndef USE_BLAS
-#include <Eigen/Dense>
-#endif
 const auto TUNER_FILE_LOCAL = std::string("leelaz_opencl_tuning");
 
-#ifndef USE_BLAS
 // Eigen helpers
 template <typename T>
 using EigenMatrixMap =
@@ -48,7 +45,6 @@ using EigenMatrixMap =
 template <typename T>
 using ConstEigenMatrixMap =
     Eigen::Map<const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>>;
-#endif
 
 template <typename net_t> static std::string getTunerKernel();
 template <typename net_t> static float getTunerMaxError();
